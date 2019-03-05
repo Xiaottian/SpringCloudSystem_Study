@@ -31,12 +31,4 @@ public class Algorithm {
         }
     }
 
-    public static void main(String[] args) {
-        int[] a = { 49, 38, 65, 97, 76, 13, 27, 50 };
-        mergeSort(a, 0, a.length-1);
-        System.out.println("排好序的数组：");
-        for (int e : a)
-            System.out.print(e+" ");
-
-    }
 }

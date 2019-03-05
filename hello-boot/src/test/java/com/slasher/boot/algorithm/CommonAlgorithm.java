@@ -2,6 +2,11 @@ package com.slasher.boot.algorithm;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 常用的算法
  */
@@ -168,8 +173,91 @@ public class CommonAlgorithm {
         return -1;
     }
 
-    public static void main(String[] args) {
-        int a = (1+2)/2;
-        System.out.println(a);
+    /**
+     * 实现全排列
+     * @param list
+     */
+    public static void perm(int[] list) {
+        perm(list,0);
     }
+    private static void perm(int[] list, int k) {
+        if (k == list.length) {
+            for (int i = 0; i < list.length; i++) {
+                System.out.print(list[i]);
+            }
+            System.out.println();
+        }else{
+            for (int i = k; i < list.length; i++) {
+                swap(list, k, i);
+                perm(list, k + 1);
+                swap(list, k, i);
+            }
+        }
+    }
+    private static void swap(int[] list, int pos1, int pos2) {
+        int temp = list[pos1];
+        list[pos1] = list[pos2];
+        list[pos2] = temp;
+    }
+    /**全排列结束*/
+
+    /**
+     * n级台阶，一次可以走1级，2级，3级（,m级）。问走完n级台阶有多少种走法
+     * 规划模型：f(n) = f(n-1) + f(n-2) +...+ f(n-m)
+     */
+    public static int countWays(int n) {
+        if(n < 0) {
+            return 0;
+        }
+        else if(n == 0) {
+            return 1;
+        }
+        else {
+            return countWays(n - 1) + countWays(n - 2) + countWays(n -3);
+        }
+        //f5 = f4 + f3 + f2 = f3 + f2 + f1 + f3 + f2 = 2f3 + 2f2 + f1 = 8 + 4 + 1
+        // f1 = 1 ,f2 = 2 ,f3 = 4
+    }
+    @Test
+    public void testCountWays(){
+        System.out.println(countWays(3));
+    }
+
+// 32 311 23 221 212 2111 131 113 122 1211 1121 1112 11111
+    //32 23
+    //311 131 113 221 212 122
+    //2111 1211 1121 1112
+    //11111
+
+    // 22   211 121 112 1111
+
+
+    /**
+     * 排好序的整数数组，去重，eg A = [1,1,2,2,3],处理之后为A = [1,2,3]
+     * @param a
+     * @return
+     */
+    public static int[] removeDuplicates(int a[]) {
+        if(a.length <= 1) {
+            return a;
+        }
+        int index = 0;
+        for(int i = 1; i < a.length; i++) {
+            if(a[index] != a[i]) {
+                a[++index] = a[i];
+            }
+        }
+        int[] b = new int[index + 1];
+        System.arraycopy(a, 0, b, 0, b.length);
+        return b;
+    }
+    @Test
+    public void testRemoveDuplicates(){
+        int[] a = {1, 1, 2, 2, 3};
+        a = removeDuplicates(a);
+        System.out.println(Arrays.toString(a));
+
+    }
+    /**数组去重 结束*/
+
 }
