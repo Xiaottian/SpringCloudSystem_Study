@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  * @EnableCircuitBreaker
  * @EnableDiscoveryClient
  * @SpringBootApplication
- * 这三个注解
+ * 这三个注解,意味着一个标准的Spring cloud标准应用应包含服务发现以及断路器
  */
 public class RibbonConsumerApplication {
 
