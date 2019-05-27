@@ -15,6 +15,7 @@ public class FeignConsumerApplication {
 
     /**
      * feign客户端默认的Logger.level对象定义为NONE级别，该级别不记录任何Feign调用过程中的信息，，所以需要调整级别
+     * Feign的logger级别有4类，none、basic、headers、full
      * @return
      */
     @Bean
