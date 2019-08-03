@@ -4,12 +4,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Book {
+public class Book implements Cloneable{
     @Value("${book.name}")
     private String name;
 
     @Value("${book.author}")
     private String author;
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public String getName() {
         return name;

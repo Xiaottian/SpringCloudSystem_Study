@@ -2,17 +2,23 @@ package com.slasher.boot.algorithm;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 /**
  * 常用的算法
+ * 1. 冒泡排序
+ * 2. 归并排序
  */
 public class CommonAlgorithm {
 
-    //最优化的冒泡排序
+    /**
+     * 最优化的冒泡排序
+     * @param a
+     * @param length
+     */
     public static void BubbleSorter(int [] a,int length){
         int j,k;
         int flag = length;
@@ -21,8 +27,8 @@ public class CommonAlgorithm {
             flag = 0;
             for (j = 1; j < k ; j++) {
                 if (a[j-1] > a[j]){//前面的数字大于后面的数字就交换
-                    int temp;
-                    temp = a[j-1];
+                    //int temp;
+                    int temp = a[j-1];
                     a[j-1] = a[j];
                     a[j] = temp;
                     flag = j;   //记录最新的尾边界
@@ -46,7 +52,7 @@ public class CommonAlgorithm {
 
 
     /**
-     * 归并排序
+     * 2. 归并排序
      * 归并排序是建立在归并操作上的一种有效的排序算法。
      * 该算法是采用分治法（divide-and-conquer）的一个非常典型的应用，
      * 先将待排序的序列划分成一个一个的元素，再进行两两归并，
@@ -199,6 +205,14 @@ public class CommonAlgorithm {
         list[pos1] = list[pos2];
         list[pos2] = temp;
     }
+
+
+    @Test
+    public void testFullPermutation(){
+        int [] ii = {1,2,3};
+        perm(ii);
+    }
+
     /**全排列结束*/
 
     /**
@@ -234,11 +248,20 @@ public class CommonAlgorithm {
 
     /**
      * 排好序的整数数组，去重，eg A = [1,1,2,2,3],处理之后为A = [1,2,3]
+     * 把数组中不重复的元素进行前移
      * @param a
      * @return
      */
-    public static int[] removeDuplicates(int a[]) {
-        if(a.length <= 1) {
+    public static List removeDuplicates(int a[]) {
+        
+        List list = new ArrayList();
+        for (int i = 0; i < a.length; i++) {
+            if (!list.contains(a[i])){
+                list.add(a[i]);
+            }
+        }
+        
+        /*if(a.length <= 1) {
             return a;
         }
         int index = 0;
@@ -246,18 +269,92 @@ public class CommonAlgorithm {
             if(a[index] != a[i]) {
                 a[++index] = a[i];
             }
+            System.out.println(index);
+            System.out.println(Arrays.toString(a));
         }
         int[] b = new int[index + 1];
         System.arraycopy(a, 0, b, 0, b.length);
-        return b;
+        return b;*/
+        return list;
     }
     @Test
     public void testRemoveDuplicates(){
-        int[] a = {1, 1, 2, 2, 3};
-        a = removeDuplicates(a);
-        System.out.println(Arrays.toString(a));
+        int[] a = {3, 1, 2, 1, 2};//如果是相邻两个元素都不一样的话，无法实现
+        List ll = removeDuplicates(a);
+        Object[] objects = ll.toArray();
+        System.out.println(Arrays.toString(objects));
 
     }
     /**数组去重 结束*/
 
+
+    @Test
+    public void testMap(){
+        Map map = new HashMap();
+        //map.put("1",1);
+        boolean b = map.containsValue(null);
+        System.out.println(b);
+    }
+
+    public static void main(String[] args)
+    {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("请输入内容：");
+        String s = null;
+        try {
+            s = input.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(s);
+
+    }
+
+
+
+}
+
+class Person{
+    String name;
+    String pwd;
+    int age;
+
+    public Person(String name, String pwd, int age) {
+        this.name = name;
+        this.pwd = pwd;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

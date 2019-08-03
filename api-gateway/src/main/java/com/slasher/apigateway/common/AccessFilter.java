@@ -49,9 +49,9 @@ public class AccessFilter extends ZuulFilter {
 
         log.info("send {} request to {}",request.getMethod(),request.getRequestURL().toString());
 
-        String token = request.getParameter("accessToken");
+        Object token = request.getParameter("accessToken");
 
-        if (token == null || token == ""){
+        if (token == null){
             log.warn("access token is empty");
             context.setSendZuulResponse(false);
             context.setResponseStatusCode(401);
